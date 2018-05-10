@@ -31,6 +31,9 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
+// Class AddTask, attached to activity_add_task.xml layout
+// Takes inputted fields and stores them as a task object in the DB
+
 public class AddTaskActivity extends AppCompatActivity {
     EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime;
     EditText txtTaskDescription, txtTaskParticipants;
@@ -45,6 +48,8 @@ public class AddTaskActivity extends AppCompatActivity {
     private static final String TAG = "AddTaskActivity";
 
     @Override
+
+    // Code executed when activity is created
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
@@ -53,7 +58,7 @@ public class AddTaskActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //Controllers Definition
+        // assign all fields to objects
         txtTaskName = (EditText) findViewById(R.id.txtTaskName);
         txtTaskLocation = (EditText) findViewById(R.id.txtLocation);
         txtTaskDate = (EditText) findViewById(R.id.txtTaskDate);
@@ -66,40 +71,17 @@ public class AddTaskActivity extends AppCompatActivity {
         chkAllDay = (CheckBox) findViewById(R.id.chkAllDay);
         btnAddTask = (Button) findViewById(R.id.btnAddTask);
 
-//TODO - Deprecated need to remove
-/*
-        //Variable Definition
-        if(getIntent().getExtras().get("oldTaskId") != null)
-            oldTaskId = getIntent().getExtras().getInt("oldTaskId");
-*/
 
-//TODO - Deprecated need to remove
-        //if intent to modification
-        /*
-        if(oldTaskId != -1){
-            TaskDB taskDB = new TaskDB(AddTaskActivity.this);
-            Task tempTask = Task.getTaskById(oldTaskId, AddTaskActivity.this);
-            txtTaskName.setText(tempTask.getTask_name());
-            txtTaskDescription.setText(tempTask.getTask_description());
-            txtTaskParticipants.setText(tempTask.getTask_participants());
-            txtTaskLocation.setText(tempTask.getTask_location());
-            txtTaskDate.setText(DateEx.getDateString(tempTask.getTask_date()));
-            txtStartTime.setText(DateEx.getTimeString(tempTask.getTask_start()));
-            txtEndTime.setText(DateEx.getTimeString(tempTask.getTask_end()));
-
-            btnAddTask.setText("Update");
-        }else{*/
         //Variables Definition
         final long selectedDate = (long)getIntent().getExtras().get("selectedDate");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date(selectedDate));
         txtTaskDate.setText(DateEx.getDateString(calendar.getTime()));
-        //}
         soundList = ArrayAdapter.createFromResource(AddTaskActivity.this, R.array.sound_list, R.layout.support_simple_spinner_dropdown_item);
         soundList.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerSounds.setAdapter(soundList);
 
-
+        // task date on-click listener lambda that when inputted a task date, stores it
         txtTaskDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +98,7 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
+        // task start time on-click listener lambda that assigns the task a start time, storing it
         txtStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,6 +114,7 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
+        // task end time on-click listener lambda that assigns the task an end time, storing it
         txtEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +130,8 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
+
+        // converts listener input into valid inputs for task
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -170,6 +156,7 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         };
 
+        // spinner that allows user to see the list of sounds
         spinnerSounds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -199,12 +186,14 @@ public class AddTaskActivity extends AppCompatActivity {
                     mediaPlayer.start();
             }
 
+            // required override to avoid unwanted superclass behavior
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
 
+        // updates time in case all day is checked
         chkAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -221,7 +210,7 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
-
+        // Creates the task object with inputs, storing the required fields and adding it to the database
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -248,7 +237,15 @@ public class AddTaskActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     Log.e(TAG, "Error while date parsing of task_endTime", e);
                 }
-                task.setTask_description(txtTaskDescription.getText().toString().trim());
+
+                if (txtTaskDescription.getText().toString().trim().equals(""))
+                {
+                    task.setTask_description("No Description");
+                }
+                else
+                    {
+                    task.setTask_description(txtTaskDescription.getText().toString().trim());
+                }
                 task.setTask_participants(txtTaskParticipants.getText().toString().trim());
                 task.setIs_all_day_task(chkAllDay.isChecked());
                 task.setTask_notification_sound(spinnerSounds.getSelectedItem().toString().trim());
