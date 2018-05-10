@@ -32,7 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 // Class AddTask, attached to activity_add_task.xml layout
-// Takes inputted fields and stores them as a task object in the DB
+// Takes inputted fields and stores them as a task object in the Database
 
 public class AddTaskActivity extends AppCompatActivity {
     EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime;
