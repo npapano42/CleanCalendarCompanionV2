@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnToday = (Button) findViewById(R.id.btnToday);
         btnViewTask = (Button) findViewById(R.id.btnViewTask);
         fabAddTask = (FloatingActionButton) findViewById(R.id.fabAddTask);
-//        //TODO Test button defined, Remove when needed
+
 //        btnTest = (Button) findViewById(R.id.btnTest);
 
 
