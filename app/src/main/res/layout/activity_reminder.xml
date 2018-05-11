@@ -46,7 +46,7 @@
         android:layout_width="168dp"
         android:layout_height="113dp"
         android:layout_marginLeft="8dp"
-        android:onClick="RemindMeAgain"
+        android:onClick="RemindMeLater"
         android:text="Notify me in 10 Minutes"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"

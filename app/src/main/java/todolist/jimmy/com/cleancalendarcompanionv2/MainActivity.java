@@ -2,19 +2,18 @@ package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.Toast;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
 
 import java.util.Date;
 
+// class works with activity_main layout to display the main screen (summary view)
 public class MainActivity extends AppCompatActivity {
 
     CalendarView calendarView;
@@ -22,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener dateSetListener;
     FloatingActionButton fabAddTask;
 
-    //TODO Remove button created for testing
-//    Button btnTest;
-
+    // method that executes when the view is layout is switched to
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,26 +31,7 @@ public class MainActivity extends AppCompatActivity {
         btnViewTask = (Button) findViewById(R.id.btnViewTask);
         fabAddTask = (FloatingActionButton) findViewById(R.id.fabAddTask);
 
-//        btnTest = (Button) findViewById(R.id.btnTest);
-
-
-        /*
-        calendarView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
-            @Override
-            public void onGlobalLayout()
-            {
-                Toast.makeText(getApplicationContext(), "Long press", Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-        btnToday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendarView.setDate(new Date().getTime(), true, true);
-            }
-        });
-
-
+        // swaps to the viewTask activity and layout when task button is pressed, getting the date
         btnViewTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentViewTask);
             }
         });
-
+        // same as method above, swaps to viewTask activity but doesn't pull the date
         btnViewTask.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -72,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // gets today's date when the today button is pressed
+        btnToday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarView.setDate(new Date().getTime(), true, true);
+            }
+        });
+
+        // listener for the floating + button that jumps to the addTask activity
         fabAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,14 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-//        //TODO Testbtn listner
-//        btnTest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ReminderActivator.runActivator(MainActivity.this);
-//            }
-//        });
     }
 }
 

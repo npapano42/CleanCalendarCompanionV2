@@ -55,18 +55,9 @@ public class ViewTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Controlls Definition
+        //Assign all fields to objects
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_Tasks);
         layoutManager = new LinearLayoutManager(ViewTaskActivity.this);
         relativeLayout_endDate = (RelativeLayout) findViewById(R.id.relativeLayout_endDate);

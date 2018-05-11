@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
@@ -20,8 +19,6 @@ import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
 import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
 
 import java.util.List;
-
-
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
     private Context context;

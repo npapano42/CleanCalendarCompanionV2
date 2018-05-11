@@ -32,27 +32,30 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
+// Used with the update_task xml file
 public class UpdateTaskActivity extends AppCompatActivity {
     int oldTaskId;
+
     private static final String TAG = "UpdateTaskActivity";
 
     Button btnDone;
-    EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime;
-    EditText txtTaskDescription, txtTaskParticipants;
+    EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime, txtTaskDescription, txtTaskParticipants;
     DatePickerDialog.OnDateSetListener dateSetListener;
     TimePickerDialog.OnTimeSetListener startTimeSetListener, endTimeSetListener;
     Spinner spinnerSounds, spinnerTaskNotificationTime;
     ArrayAdapter<CharSequence> soundList;
     CheckBox chkAllDay;
 
+    // method that runs when screen is swapped to
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Controllers Definition
+        // assin all fields to objects
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         btnDone = (Button) findViewById(R.id.btnAddTask);
         txtTaskName = (EditText) findViewById(R.id.txtTaskName);
@@ -70,10 +73,9 @@ public class UpdateTaskActivity extends AppCompatActivity {
         soundList.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerSounds.setAdapter(soundList);
 
-        //Variable Definition
         oldTaskId = getIntent().getExtras().getInt("oldTaskId");
 
-        //Assign old task data into ui
+        //Load old task onto screen
         TaskDB taskDB = new TaskDB(UpdateTaskActivity.this);
         Task tempTask = Task.getTaskById(oldTaskId, UpdateTaskActivity.this);
         txtTaskName.setText(tempTask.getTask_name());
@@ -85,15 +87,9 @@ public class UpdateTaskActivity extends AppCompatActivity {
         txtEndTime.setText(DateEx.getTimeString(tempTask.getTask_end()));
         txtTaskDate.setText(DateEx.getDateString(tempTask.getTask_date()));
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        // text to set the task date listener
         txtTaskDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +106,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
             }
         });
 
+        // listener to get the start time of the task
         txtStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +122,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
             }
         });
 
+        // listener to get the end time of the task
         txtEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +138,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
             }
         });
 
+        // next 3 chunks convert date and times to be in correct format for use
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -164,6 +163,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
             }
         };
 
+        // handles the sounds
         spinnerSounds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -193,13 +193,14 @@ public class UpdateTaskActivity extends AppCompatActivity {
                     mediaPlayer.start();
             }
 
+            // override unwanted default behavior
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
 
-
+        // adjust time for all day if button is checked
         chkAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -216,7 +217,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
             }
         });
 
-
+        // sets all the data, updates task, and puts it back into the database
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

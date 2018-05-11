@@ -2,15 +2,9 @@
     <string name="app_name">CleanCalendarCompanion</string>
     <string name="title_activity_add_task">Add New Task</string>
     <string name="action_settings">Settings</string>
-    <string-array name="sound_list">
-        <item>Select Sound</item>
-        <item>Buzz</item>
-        <item>Gets in the way</item>
-        <item>Jingle Bells</item>
-        <item>Rooster</item>
-        <item>Siren</item>
-        <item>System Fault</item>
-    </string-array>
+    <string name="title_activity_view_task">View To Do</string>
+    <string name="title_activity_update_task">Change Task</string>
+
     <string-array name="notification_options">
         <item>On time</item>
         <item>Before 2 minutes</item>
@@ -21,6 +15,13 @@
         <item>Before 3 hours</item>
         <item>Before 1 day</item>
     </string-array>
-    <string name="title_activity_view_task">View To Do</string>
-    <string name="title_activity_update_task">Change Task</string>
+    <string-array name="sound_list">
+        <item>Select Sound</item>
+        <item>Buzz</item>
+        <item>Gets in the way</item>
+        <item>Jingle Bells</item>
+        <item>Rooster</item>
+        <item>Siren</item>
+        <item>System Fault</item>
+    </string-array>
 </resources>

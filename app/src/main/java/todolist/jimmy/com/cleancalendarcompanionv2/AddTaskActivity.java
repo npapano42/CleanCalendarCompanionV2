@@ -11,16 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
@@ -33,15 +34,13 @@ import java.util.Date;
 
 // Class AddTask, attached to activity_add_task.xml layout
 // Takes inputted fields and stores them as a task object in the Database
-
 public class AddTaskActivity extends AppCompatActivity {
-    EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime;
-    EditText txtTaskDescription, txtTaskParticipants;
+    EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime, txtTaskDescription, txtTaskParticipants;
     DatePickerDialog.OnDateSetListener dateSetListener;
     TimePickerDialog.OnTimeSetListener startTimeSetListener, endTimeSetListener;
     Spinner spinnerSounds, spinnerTaskNotificationTime;
     ArrayAdapter<CharSequence> soundList;
-    CheckBox chkAllDay;
+    CheckBox allDayCheck;
     Button btnAddTask;
 
     int oldTaskId = -1;
@@ -57,7 +56,6 @@ public class AddTaskActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         // assign all fields to objects
         txtTaskName = (EditText) findViewById(R.id.txtTaskName);
         txtTaskLocation = (EditText) findViewById(R.id.txtLocation);
@@ -68,9 +66,8 @@ public class AddTaskActivity extends AppCompatActivity {
         txtTaskParticipants = (EditText) findViewById(R.id.txtTaskParticipants);
         spinnerTaskNotificationTime = (Spinner) findViewById(R.id.spinnerTaskNotificationTime);
         spinnerSounds = (Spinner) findViewById(R.id.spinnerSounds);
-        chkAllDay = (CheckBox) findViewById(R.id.chkAllDay);
+        allDayCheck = (CheckBox) findViewById(R.id.chkAllDay);
         btnAddTask = (Button) findViewById(R.id.btnAddTask);
-
 
         //Variables Definition
         final long selectedDate = (long)getIntent().getExtras().get("selectedDate");
@@ -194,10 +191,10 @@ public class AddTaskActivity extends AppCompatActivity {
         });
 
         // updates time in case all day is checked
-        chkAllDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        allDayCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(chkAllDay.isChecked()) {
+                if(allDayCheck.isChecked()) {
                     txtStartTime.setText(DateEx.getTimeString(DateEx.getTodayMorning()));
                     txtEndTime.setText(DateEx.getTimeString(DateEx.getTodayMidNight()));
                     txtStartTime.setEnabled(false);
@@ -242,12 +239,11 @@ public class AddTaskActivity extends AppCompatActivity {
                 {
                     task.setTask_description("No Description");
                 }
-                else
-                    {
+                else {
                     task.setTask_description(txtTaskDescription.getText().toString().trim());
                 }
                 task.setTask_participants(txtTaskParticipants.getText().toString().trim());
-                task.setIs_all_day_task(chkAllDay.isChecked());
+                task.setIs_all_day_task(allDayCheck.isChecked());
                 task.setTask_notification_sound(spinnerSounds.getSelectedItem().toString().trim());
                 String notify = (String) spinnerTaskNotificationTime.getSelectedItem();
                 switch(notify){
