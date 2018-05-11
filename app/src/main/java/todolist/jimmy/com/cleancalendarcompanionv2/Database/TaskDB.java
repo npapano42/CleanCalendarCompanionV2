@@ -5,19 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.text.SimpleDateFormat;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import todolist.jimmy.com.cleancalendarcompanionv2.AddTaskActivity;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
-import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
+import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 
 
@@ -67,8 +56,6 @@ public class TaskDB extends SQLiteOpenHelper {
 
     public boolean insert(Task task){
         SQLiteDatabase db = this.getWritableDatabase();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
         ContentValues contentValues = new ContentValues();
         contentValues.put("task_name", task.getTask_name());
         contentValues.put("task_location", task.getTask_location());
@@ -92,7 +79,6 @@ public class TaskDB extends SQLiteOpenHelper {
 
     public boolean update(Task newTask, int oldTaskId){
         SQLiteDatabase db = this.getWritableDatabase();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         ContentValues contentValues = new ContentValues();
         contentValues.put("task_name", newTask.getTask_name());
         contentValues.put("task_location", newTask.getTask_location());

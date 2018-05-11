@@ -7,16 +7,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Parcelable;
 import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
 
-import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
+import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 import todolist.jimmy.com.cleancalendarcompanionv2.R;
 import todolist.jimmy.com.cleancalendarcompanionv2.ReminderActivity;
-
-import java.io.Serializable;
-
 
 
 public class NotificationReciever extends BroadcastReceiver {

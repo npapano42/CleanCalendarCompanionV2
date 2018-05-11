@@ -90,7 +90,7 @@ public class AddTaskActivity extends AppCompatActivity {
                         DateEx.getMonthOf(null),
                         DateEx.getDayOf(null)
                 );
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 datePickerDialog.show();
             }
         });
@@ -106,7 +106,7 @@ public class AddTaskActivity extends AppCompatActivity {
                         12,0,
                         false
                 );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 timePickerDialog.show();
             }
         });
@@ -122,7 +122,7 @@ public class AddTaskActivity extends AppCompatActivity {
                         12, 0,
                         false
                 );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 timePickerDialog.show();
             }
         });
