@@ -35,6 +35,6 @@
     <include
         android:id="@+id/include"
         layout="@layout/content_add_task"
-        android:layout_height="1129dp" />
+        />
 
 </android.support.design.widget.CoordinatorLayout>
