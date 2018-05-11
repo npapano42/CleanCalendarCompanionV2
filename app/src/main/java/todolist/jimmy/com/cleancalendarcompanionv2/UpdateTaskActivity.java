@@ -56,7 +56,6 @@ public class UpdateTaskActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // assin all fields to objects
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         btnDone = (Button) findViewById(R.id.btnAddTask);
         txtTaskName = (EditText) findViewById(R.id.txtTaskName);
         txtTaskLocation = (EditText) findViewById(R.id.txtLocation);

@@ -2,6 +2,7 @@ package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         btnToday = (Button) findViewById(R.id.btnToday);
         btnViewTask = (Button) findViewById(R.id.btnViewTask);
         fabAddTask = (FloatingActionButton) findViewById(R.id.fabAddTask);
+        fabAddTask.setColorFilter(Color.WHITE);
 
         // swaps to the viewTask activity and layout when task button is pressed, getting the date
         btnViewTask.setOnClickListener(new View.OnClickListener() {
