@@ -1,9 +1,8 @@
-package todolist.jimmy.com.cleancalendarcompanionv2.Models;
+package todolist.jimmy.com.cleancalendarcompanionv2.Objects;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
-import android.widget.Toast;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
@@ -34,9 +33,8 @@ public class Task implements Serializable{
     private String task_notification_sound;
 
 
-
-    public Task() {
-    }
+    // default ctor
+    public Task() {}
 
     public Task(int task_id, String task_name, String task_description, String task_location,
                 String task_participants, Date task_date, boolean is_all_day_task,

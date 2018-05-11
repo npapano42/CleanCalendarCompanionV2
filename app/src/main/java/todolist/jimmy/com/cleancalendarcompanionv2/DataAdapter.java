@@ -16,7 +16,7 @@ import android.widget.TextView;
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
-import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
+import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 import java.util.List;
 

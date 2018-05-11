@@ -1,19 +1,14 @@
 package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.app.DatePickerDialog;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -21,15 +16,11 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
-import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
+import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -195,7 +186,6 @@ public class ViewTaskActivity extends AppCompatActivity {
     private void setRecyclerViewAdapter(List<Task> tasks){
         adapter = new DataAdapter(ViewTaskActivity.this, tasks);
         recyclerView.setAdapter(adapter);
-        //recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.setLayoutManager(layoutManager);
     }
 

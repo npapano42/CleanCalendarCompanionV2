@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,11 +24,9 @@ import android.widget.Toast;
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
-import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
+import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
 
 // Used with the update_task xml file
 public class UpdateTaskActivity extends AppCompatActivity {
@@ -55,7 +51,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // assin all fields to objects
+        // assign all fields to objects
         btnDone = (Button) findViewById(R.id.btnAddTask);
         txtTaskName = (EditText) findViewById(R.id.txtTaskName);
         txtTaskLocation = (EditText) findViewById(R.id.txtLocation);

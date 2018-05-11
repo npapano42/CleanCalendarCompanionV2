@@ -26,7 +26,7 @@ import android.widget.TimePicker;
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
-import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
+import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -106,7 +106,7 @@ public class AddTaskActivity extends AppCompatActivity {
                         12,0,
                         false
                 );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
                 timePickerDialog.show();
             }
         });

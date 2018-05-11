@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
-import todolist.jimmy.com.cleancalendarcompanionv2.Models.Task;
+import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 // Class attached with the reminder xml file
 // Pops up when reminder time is triggered
