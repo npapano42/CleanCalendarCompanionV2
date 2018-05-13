@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
-
-
 public class TaskDB extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Tasks.db";
     private static final String TABLE_NAME = "Tasks";
@@ -23,7 +21,6 @@ public class TaskDB extends SQLiteOpenHelper {
     private static final String COL_8 = "task_location";
     private static final String COL_9 = "is_all_day_task";
     private static final String COL_10 = "task_notification_time";
-    private static final String COL_11 = "notification_sound";
 
     private static final String SQL_CREATE_ENTRIES = "create table "+TABLE_NAME+" (" +
             COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -35,8 +32,7 @@ public class TaskDB extends SQLiteOpenHelper {
             COL_7+" DATETIME, " +
             COL_8+" TEXT, " +
             COL_9+" BOOL, " +
-            COL_10+" DATETIME, " +
-            COL_11+" TEXT)";
+            COL_10+" DATETIME)";
     private static final String SQL_DROP_ENTRIES = "drop table if exists "+TABLE_NAME;
 
 
@@ -66,8 +62,6 @@ public class TaskDB extends SQLiteOpenHelper {
         contentValues.put("task_end", DateEx.getTimeString(task.getTask_end()));
         contentValues.put("task_location", task.getTask_location());
         contentValues.put("is_all_day_task", task.is_all_day_task());
-        contentValues.put("task_notification_time", DateEx.getDateTimeString(task.getTask_notification_time()));
-        contentValues.put("notification_sound", task.getTask_notification_sound());
 
         long insertedResult = db.insert(TABLE_NAME, null, contentValues);
         if(insertedResult == -1){
@@ -89,8 +83,6 @@ public class TaskDB extends SQLiteOpenHelper {
         contentValues.put("task_end", DateEx.getTimeString(newTask.getTask_end()));
         contentValues.put("task_location", newTask.getTask_location());
         contentValues.put("is_all_day_task", newTask.is_all_day_task());
-        contentValues.put("task_notification_time", DateEx.getDateTimeString(newTask.getTask_notification_time()));
-        contentValues.put("notification_sound", newTask.getTask_notification_sound());
         String selection = COL_1 + " = ?";
         String[] selectionArgs = {String.valueOf(oldTaskId)};
         long updateResult = db.update(TABLE_NAME, contentValues, selection, selectionArgs);
@@ -126,7 +118,6 @@ public class TaskDB extends SQLiteOpenHelper {
                 COL_8,
                 COL_9,
                 COL_10,
-                COL_11
         };
         return db.query(TABLE_NAME, projection, null, null, null, null, null);
     }
@@ -146,7 +137,6 @@ public class TaskDB extends SQLiteOpenHelper {
                 COL_8,
                 COL_9,
                 COL_10,
-                COL_11
         };
         String selection = "task_date like ?";
         String[] selectionArgs = {date+"%"};
@@ -166,7 +156,6 @@ public class TaskDB extends SQLiteOpenHelper {
                 COL_8,
                 COL_9,
                 COL_10,
-                COL_11
         };
         String selection = "task_date between ? and ?";
         String[] selectionArgs = {date1, date2};
@@ -186,7 +175,6 @@ public class TaskDB extends SQLiteOpenHelper {
                 COL_8,
                 COL_9,
                 COL_10,
-                COL_11
         };
         String selection = "task_id = ?";
         String[] selectionArgs = {String.valueOf(taskId)};

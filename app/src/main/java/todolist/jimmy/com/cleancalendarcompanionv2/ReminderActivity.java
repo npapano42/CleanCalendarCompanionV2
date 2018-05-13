@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
-import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
 import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 // Class attached with the reminder xml file
@@ -49,17 +48,4 @@ public class ReminderActivity extends AppCompatActivity {
         txtDescription.setText(description);
     }
 
-    // Postpones reminder ten minutes, then repeats this activity
-    public void RemindMeLater(View view){
-        Task task = (Task)getIntent().getSerializableExtra("task");
-        ReminderActivator.postponeReminder(ReminderActivity.this, task, 10);
-        finish();
-    }
-
-    // Ends reminder
-    public void StopReminder(View view){
-        Task task = (Task)getIntent().getSerializableExtra("task");
-        ReminderActivator.suspendReminder(ReminderActivity.this, task);
-        finish();
-    }
 }

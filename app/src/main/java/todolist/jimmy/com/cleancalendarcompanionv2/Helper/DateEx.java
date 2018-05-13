@@ -6,12 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
-
 public class DateEx extends Date{
-
-    static DateFormat dateFormat = DateFormat.getDateInstance();
-    static DateFormat dateTimeFormat = DateFormat.getDateTimeInstance();
+    static DateFormat dateFormat = DateFormat.getDateInstance(); // new SimpleDateFormat("MM-dd-yyyy");
+    static DateFormat dateTimeFormat = DateFormat.getDateTimeInstance(); //new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
     static DateFormat timeFormat = DateFormat.getTimeInstance();
 
     public DateEx(){

@@ -115,7 +115,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                         DateEx.getYearOf(null),
                         DateEx.getMonthOf(null)-1,
                         DateEx.getDayOf(null));
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 datePickerDialog.show();
             }
         });
@@ -128,7 +128,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                         DateEx.getYearOf(null),
                         DateEx.getMonthOf(null)-1,
                         DateEx.getDayOf(null));
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 datePickerDialog.show();
             }
         });
@@ -136,14 +136,14 @@ public class ViewTaskActivity extends AppCompatActivity {
         startDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                tvDate.setText(year + "-" + (month+1) + "-" +day);
+                tvDate.setText((month+1) + "/" + day + "/" + year);
             }
         };
 
         endDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                tvEndDate.setText(year + "-" + (month+1) + "-" + day);
+                tvEndDate.setText((month+1) + "/" + day + "/" + year);
             }
         };
 

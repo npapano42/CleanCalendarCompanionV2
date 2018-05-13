@@ -77,7 +77,15 @@
             app:layout_constraintTop_toBottomOf="@+id/txtTaskDescription"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp" />
-
+        <Button
+            android:id="@+id/btnSetDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Set Date"
+            app:layout_constraintRight_toLeftOf="@id/txtTaskDate"
+            app:layout_constraintEnd_toEndOf="@id/txtTaskDate"
+            app:layout_constraintTop_toBottomOf="@+id/txtLocation"
+             />
         <EditText
             android:id="@+id/txtTaskDate"
             android:layout_width="0dp"
@@ -95,44 +103,61 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtLocation" />
 
-        <EditText
-            android:id="@+id/txtStartTime"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/btnTimeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="Start Time"
-            android:inputType="none"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTaskDate"
-            android:layout_marginStart="18dp" />
-
-        <EditText
-            android:id="@+id/txtEndTime"
-            android:layout_width="0dp"
+            >
+            <Button
+                android:id="@+id/btnStartTime"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Set Start Time"
+                app:layout_constraintLeft_toLeftOf="@id/txtTaskDate" />
+            <Button
+                android:id="@+id/btnEndTime"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Set End Time"
+                app:layout_constraintLeft_toRightOf="@id/btnStartTime"
+                app:layout_constraintTop_toBottomOf="@+id/txtTaskDate" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/txtTimeLayout"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="End Time"
-            android:inputType="time"
-            app:layout_constraintLeft_toRightOf="@+id/txtStartTime"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/txtStartTime"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/btnTimeLayout"
+            >
+            <EditText
+                android:id="@+id/txtStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="6"
+                android:hint="Start Time"
+                android:inputType="time"
+                app:layout_constraintTop_toBottomOf="@+id/btnTimeLayout"
+                android:layout_marginStart="8dp" />
 
-        <Spinner
-            android:id="@+id/spinnerSounds"
-            android:layout_width="221dp"
-            android:layout_height="53dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chkAllDay"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp" />
+            <EditText
+                android:id="@+id/txtEndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="End Time"
+                android:inputType="time"
+                app:layout_constraintLeft_toRightOf="@+id/txtStartTime"
+                android:layout_marginRight="8dp"
+
+                app:layout_constraintBaseline_toBaselineOf="@+id/txtStartTime"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/chkAllDay"
@@ -144,7 +169,7 @@
             android:text="All Day"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtStartTime"
+            app:layout_constraintTop_toBottomOf="@+id/txtTimeLayout"
             app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -164,17 +189,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerTaskNotificationTime" />
-
-        <Spinner
-            android:id="@+id/spinnerTaskNotificationTime"
-            android:layout_width="534dp"
-            android:layout_height="52dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:entries="@array/notification_options"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerSounds" />
+            app:layout_constraintTop_toBottomOf="@+id/chkAllDay" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

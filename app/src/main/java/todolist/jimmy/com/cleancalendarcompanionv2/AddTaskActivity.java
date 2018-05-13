@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -25,7 +22,6 @@ import android.widget.TimePicker;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
-import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
 import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 import java.text.ParseException;
@@ -38,16 +34,14 @@ public class AddTaskActivity extends AppCompatActivity {
     EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime, txtTaskDescription, txtTaskParticipants;
     DatePickerDialog.OnDateSetListener dateSetListener;
     TimePickerDialog.OnTimeSetListener startTimeSetListener, endTimeSetListener;
-    Spinner spinnerSounds, spinnerTaskNotificationTime;
-    ArrayAdapter<CharSequence> soundList;
+    Spinner spinnerTaskNotificationTime;
     CheckBox allDayCheck;
-    Button btnAddTask;
+    Button btnAddTask, btnSetDate, btnStartTime, btnEndTime;
 
     int oldTaskId = -1;
     private static final String TAG = "AddTaskActivity";
 
     @Override
-
     // Code executed when activity is created
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,22 +58,20 @@ public class AddTaskActivity extends AppCompatActivity {
         txtEndTime = (EditText) findViewById(R.id.txtEndTime);
         txtTaskDescription = (EditText) findViewById(R.id.txtTaskDescription);
         txtTaskParticipants = (EditText) findViewById(R.id.txtTaskParticipants);
-        spinnerTaskNotificationTime = (Spinner) findViewById(R.id.spinnerTaskNotificationTime);
-        spinnerSounds = (Spinner) findViewById(R.id.spinnerSounds);
         allDayCheck = (CheckBox) findViewById(R.id.chkAllDay);
         btnAddTask = (Button) findViewById(R.id.btnAddTask);
+        btnSetDate = (Button) findViewById(R.id.btnSetDate);
+        btnStartTime = (Button) findViewById(R.id.btnStartTime);
+        btnEndTime = (Button) findViewById(R.id.btnEndTime);
 
         //Variables Definition
         final long selectedDate = (long)getIntent().getExtras().get("selectedDate");
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date(selectedDate));
         txtTaskDate.setText(DateEx.getDateString(calendar.getTime()));
-        soundList = ArrayAdapter.createFromResource(AddTaskActivity.this, R.array.sound_list, R.layout.support_simple_spinner_dropdown_item);
-        soundList.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinnerSounds.setAdapter(soundList);
 
         // task date on-click listener lambda that when inputted a task date, stores it
-        txtTaskDate.setOnClickListener(new View.OnClickListener() {
+        btnSetDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -87,8 +79,9 @@ public class AddTaskActivity extends AppCompatActivity {
                         R.style.Theme_AppCompat_DayNight_Dialog,
                         dateSetListener,
                         DateEx.getYearOf(null),
-                        DateEx.getMonthOf(null),
+                        DateEx.getMonthOf(null) -1,
                         DateEx.getDayOf(null)
+
                 );
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 datePickerDialog.show();
@@ -132,7 +125,7 @@ public class AddTaskActivity extends AppCompatActivity {
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                String date = year+"-"+(month+1)+"-"+day;
+                String date = (month+1)+"/"+day+"/"+year;
                 txtTaskDate.setText(date);
             }
         };
@@ -152,43 +145,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 txtEndTime.setText(time);
             }
         };
-
-        // spinner that allows user to see the list of sounds
-        spinnerSounds.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                MediaPlayer mediaPlayer = null;
-                String soundName = adapterView.getItemAtPosition(i).toString().toLowerCase();
-                switch (soundName){
-                    case "buzz" :
-                        mediaPlayer = MediaPlayer.create(AddTaskActivity.this, R.raw.buzz);
-                        break;
-                    case "gets in the way" :
-                        mediaPlayer = MediaPlayer.create(AddTaskActivity.this, R.raw.gets_in_the_way);
-                        break;
-                    case "jingle bells" :
-                        mediaPlayer = MediaPlayer.create(AddTaskActivity.this, R.raw.jingle_bells);
-                        break;
-                    case "rooster" :
-                        mediaPlayer = MediaPlayer.create(AddTaskActivity.this, R.raw.rooster);
-                        break;
-                    case "siren" :
-                        mediaPlayer = MediaPlayer.create(AddTaskActivity.this, R.raw.siren);
-                        break;
-                    case "system fault" :
-                        mediaPlayer = MediaPlayer.create(AddTaskActivity.this, R.raw.system_fault);
-                        break;
-                }
-                if(mediaPlayer != null)
-                    mediaPlayer.start();
-            }
-
-            // required override to avoid unwanted superclass behavior
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         // updates time in case all day is checked
         allDayCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -244,51 +200,14 @@ public class AddTaskActivity extends AppCompatActivity {
                 }
                 task.setTask_participants(txtTaskParticipants.getText().toString().trim());
                 task.setIs_all_day_task(allDayCheck.isChecked());
-                task.setTask_notification_sound(spinnerSounds.getSelectedItem().toString().trim());
-                String notify = (String) spinnerTaskNotificationTime.getSelectedItem();
-                switch(notify){
-                    case "On time" :
-                        task.setTask_notification_time(task.getTask_start());
-                        break;
-                    case "Before 2 minutes" :
-                        task.setTask_notification_time(DateEx.addMinutesTo(task.getTask_start(), 2));
-                        break;
-                    case "Before 5 minutes" :
-                        task.setTask_notification_time(DateEx.addMinutesTo(task.getTask_start(), 5));
-                        break;
-                    case "Before 10 minutes" :
-                        task.setTask_notification_time(DateEx.addMinutesTo(task.getTask_start(), 10));
-                        break;
-                    case "Before 30 minutes" :
-                        task.setTask_notification_time(DateEx.addMinutesTo(task.getTask_start(), 30));
-                        break;
-                    case "Before 1 hour" :
-                        task.setTask_notification_time(DateEx.addMinutesTo(task.getTask_start(), 60));
-                        break;
-                    case "Before 3 hours" :
-                        task.setTask_notification_time(DateEx.addMinutesTo(task.getTask_start(), 180));
-                        break;
-                    case "Before 1 day" :
-                        task.setTask_notification_time(DateEx.addMinutesTo(task.getTask_start(), 1440));
-                        break;
-                    default:
-                        task.setTask_notification_time(task.getTask_start());
-                        break;
-                }
 
-                if(task.getTask_notification_time().before(new Date())){
-                    Snackbar.make(view, "Cannot set reminders for past events", Snackbar.LENGTH_LONG)
-                            .setAction("OK", null).show();
-                }else{
                     TaskDB taskDB = new TaskDB(AddTaskActivity.this);
                     if(taskDB.insert(task)){
-                        ReminderActivator.runActivator(AddTaskActivity.this, task);
                         Toast.makeText(AddTaskActivity.this, "Reminder added successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     else
                         Toast.makeText(AddTaskActivity.this, "Error while saving reminder", Toast.LENGTH_LONG).show();
-                }
             }
         });
     }

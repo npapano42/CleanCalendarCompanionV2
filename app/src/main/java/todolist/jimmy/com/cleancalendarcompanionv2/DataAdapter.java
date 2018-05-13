@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
-import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
 import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 import java.util.List;
@@ -95,7 +94,6 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
                         }else if(item.getItemId() == R.id.menuItem_removeTask){
                             TaskDB taskDB = new TaskDB(context);
                             if(taskDB.delete(taskId)){
-                                ReminderActivator.suspendReminder(context, tasks.get(holder.getAdapterPosition()));
                                 tasks.remove(holder.getAdapterPosition());
                                 notifyItemRemoved(holder.getAdapterPosition());
                                 Snackbar.make(view, "Task Removed", Snackbar.LENGTH_LONG)

@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-import todolist.jimmy.com.cleancalendarcompanionv2.Helper.ReminderActivator;
-
 import java.util.Date;
 
 // class works with activity_main layout to display the main screen (summary view)

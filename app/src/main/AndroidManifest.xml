@@ -38,8 +38,6 @@
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"/>
 
-        <receiver android:name=".Helper.NotificationReciever" />
-
         <activity
             android:name=".UpdateTaskActivity"
             android:label="@string/title_activity_update_task"
