@@ -10,7 +10,6 @@ import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

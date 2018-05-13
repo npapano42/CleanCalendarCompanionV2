@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,7 +33,6 @@ public class AddTaskActivity extends AppCompatActivity {
     EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime, txtTaskDescription, txtTaskParticipants;
     DatePickerDialog.OnDateSetListener dateSetListener;
     TimePickerDialog.OnTimeSetListener startTimeSetListener, endTimeSetListener;
-    Spinner spinnerTaskNotificationTime;
     CheckBox allDayCheck;
     Button btnAddTask, btnSetDate, btnStartTime, btnEndTime;
 

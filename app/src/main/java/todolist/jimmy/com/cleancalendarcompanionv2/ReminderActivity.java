@@ -2,7 +2,6 @@ package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
@@ -29,7 +28,7 @@ public class ReminderActivity extends AppCompatActivity {
         txtTaskName.setText(task.getTask_name().toUpperCase());
         String description = task.getTask_description()+
                 "\nLocation: "+task.getTask_location()+
-                "\nOn: "+DateEx.getDateString(task.getTask_date());
+                "\nOn: "+ DateEx.getDateString(task.getTask_date());
         if(task.is_all_day_task())
         {
             description = description

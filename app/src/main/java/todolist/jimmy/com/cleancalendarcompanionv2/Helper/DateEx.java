@@ -7,8 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateEx extends Date{
-    static DateFormat dateFormat = DateFormat.getDateInstance(); // new SimpleDateFormat("MM-dd-yyyy");
-    static DateFormat dateTimeFormat = DateFormat.getDateTimeInstance(); //new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+    static DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    static DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     static DateFormat timeFormat = DateFormat.getTimeInstance();
 
     public DateEx(){
