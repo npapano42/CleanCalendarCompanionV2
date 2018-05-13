@@ -24,10 +24,10 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+// class that goes with view_task.xml to display the to-do list
 public class ViewTaskActivity extends AppCompatActivity {
 
     public static final String TAG = "ViewTaskActivity.java";
-
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
@@ -40,6 +40,7 @@ public class ViewTaskActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener endDateSetListener;
     List<Task> taskList;
 
+    // method that runs when activity is swapped to
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +60,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         tvDate = (TextView) findViewById(R.id.tvDate);
         tvEndDate = (TextView) findViewById(R.id.tvEndDate);
 
-
+        // pull correct date
         if(!getIntent().hasExtra("selectedDate")){
             taskList = Task.getAllTasks(ViewTaskActivity.this);
             rbAll.setChecked(true);
@@ -75,7 +76,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         setRecyclerViewAdapter(taskList);
 
 
-
+        // get between button to correctly update date
         rbBetween.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -86,7 +87,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // get all button to show all tasks
         rbAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -96,7 +97,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // get on button to show tasks on a specific date
         rbOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -106,7 +107,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                 }
             }
         });
-
+        // start date displayed, can be tapped to adjust date
         tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +120,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
+        // end date displayed, can be tapped to adjust date
         tvEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +134,7 @@ public class ViewTaskActivity extends AppCompatActivity {
             }
         });
 
+        // adjusted the form of the start date to work
         startDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -140,6 +142,7 @@ public class ViewTaskActivity extends AppCompatActivity {
             }
         };
 
+        // adjust the form of the end date to work
         endDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -147,6 +150,7 @@ public class ViewTaskActivity extends AppCompatActivity {
             }
         };
 
+        // get filter to get dates correctly
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,7 +186,7 @@ public class ViewTaskActivity extends AppCompatActivity {
         });
 
     }
-
+    // correctly list tasks in a scrollable view
     private void setRecyclerViewAdapter(List<Task> tasks){
         adapter = new DataAdapter(ViewTaskActivity.this, tasks);
         recyclerView.setAdapter(adapter);

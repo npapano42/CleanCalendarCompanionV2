@@ -87,7 +87,7 @@ public class AddTaskActivity extends AppCompatActivity {
         });
 
         // task start time on-click listener lambda that assigns the task a start time, storing it
-        txtStartTime.setOnClickListener(new View.OnClickListener() {
+        btnStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -103,7 +103,7 @@ public class AddTaskActivity extends AppCompatActivity {
         });
 
         // task end time on-click listener lambda that assigns the task an end time, storing it
-        txtEndTime.setOnClickListener(new View.OnClickListener() {
+        btnEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -117,7 +117,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
-
 
         // converts listener input into valid inputs for task
         dateSetListener = new DatePickerDialog.OnDateSetListener() {

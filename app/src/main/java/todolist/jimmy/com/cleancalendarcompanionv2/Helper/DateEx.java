@@ -9,7 +9,7 @@ import java.util.Date;
 public class DateEx extends Date{
     static DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     static DateFormat dateTimeFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-    static DateFormat timeFormat = DateFormat.getTimeInstance();
+    static DateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
     public DateEx(){
         super();

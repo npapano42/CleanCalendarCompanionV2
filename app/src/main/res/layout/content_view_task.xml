@@ -30,13 +30,21 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:orientation="horizontal"
             android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:id="@+id/rbAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:layout_weight="1"
+                android:text="All" />
+
             <RadioButton
                 android:id="@+id/rbOn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:checked="true"
                 android:text="On"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="0dp"
@@ -47,20 +55,12 @@
                 android:id="@+id/rbBetween"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:checked="false"
                 android:text="Between"
                 app:layout_constraintBaseline_toBaselineOf="@+id/rbOn"
                 app:layout_constraintLeft_toRightOf="@+id/rbOn" />
-
-            <RadioButton
-                android:id="@+id/rbAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="All" />
 
         </RadioGroup>
 
