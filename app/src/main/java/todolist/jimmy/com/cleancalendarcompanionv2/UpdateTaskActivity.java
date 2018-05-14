@@ -2,6 +2,7 @@ package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
 
     private static final String TAG = "UpdateTaskActivity";
 
-    Button btnDone;
+    Button btnDone, btnSetDate, btnStartTime, btnEndTime;
     EditText txtTaskName, txtTaskLocation, txtTaskDate, txtStartTime, txtEndTime, txtTaskDescription, txtTaskParticipants;
     DatePickerDialog.OnDateSetListener dateSetListener;
     TimePickerDialog.OnTimeSetListener startTimeSetListener, endTimeSetListener;
@@ -46,6 +47,9 @@ public class UpdateTaskActivity extends AppCompatActivity {
 
         // assign all fields to objects
         btnDone = (Button) findViewById(R.id.btnAddTask);
+        btnSetDate = (Button) findViewById(R.id.btnSetDate);
+        btnStartTime = (Button) findViewById(R.id.btnStartTime);
+        btnEndTime = (Button) findViewById(R.id.btnEndTime);
         txtTaskName = (EditText) findViewById(R.id.txtTaskName);
         txtTaskLocation = (EditText) findViewById(R.id.txtLocation);
         txtTaskDate = (EditText) findViewById(R.id.txtTaskDate);
@@ -54,6 +58,11 @@ public class UpdateTaskActivity extends AppCompatActivity {
         txtTaskDescription = (EditText) findViewById(R.id.txtTaskDescription);
         txtTaskParticipants = (EditText) findViewById(R.id.txtTaskParticipants);
         chkAllDay = (CheckBox) findViewById(R.id.chkAllDay);
+
+        // disable text boxes (patch of editText not working as intended)
+        txtStartTime.setEnabled(false);
+        txtEndTime.setEnabled(false);
+        txtTaskDate.setEnabled(false);
 
         oldTaskId = getIntent().getExtras().getInt("oldTaskId");
 
@@ -69,27 +78,24 @@ public class UpdateTaskActivity extends AppCompatActivity {
         txtEndTime.setText(DateEx.getTimeString(tempTask.getTask_end()));
         txtTaskDate.setText(DateEx.getDateString(tempTask.getTask_date()));
 
-
-
         // text to set the task date listener
-        txtTaskDate.setOnClickListener(new View.OnClickListener() {
+        btnSetDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         UpdateTaskActivity.this,
-                        R.style.Theme_AppCompat_DayNight_Dialog,
                         dateSetListener,
                         DateEx.getYearOf(null),
                         DateEx.getMonthOf(null),
                         DateEx.getDayOf(null)
                 );
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 datePickerDialog.show();
             }
         });
 
         // listener to get the start time of the task
-        txtStartTime.setOnClickListener(new View.OnClickListener() {
+        btnStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -99,13 +105,13 @@ public class UpdateTaskActivity extends AppCompatActivity {
                         12,0,
                         false
                 );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 timePickerDialog.show();
             }
         });
 
         // listener to get the end time of the task
-        txtEndTime.setOnClickListener(new View.OnClickListener() {
+        btnEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -115,7 +121,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
                         12, 0,
                         false
                 );
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 timePickerDialog.show();
             }
         });
@@ -133,6 +139,8 @@ public class UpdateTaskActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 String time = i + ":" + i1;
+                if (i1 < 10)
+                    time+= "0";
                 txtStartTime.setText(time);
             }
         };
@@ -141,6 +149,8 @@ public class UpdateTaskActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 String time = i + ":" + i1;
+                if (i1 < 10)
+                    time+= "0";
                 txtEndTime.setText(time);
             }
         };
@@ -153,12 +163,6 @@ public class UpdateTaskActivity extends AppCompatActivity {
                 if(chkAllDay.isChecked()) {
                     txtStartTime.setText(DateEx.getTimeString(DateEx.getTodayMorning()));
                     txtEndTime.setText(DateEx.getTimeString(DateEx.getTodayMidNight()));
-                    txtStartTime.setEnabled(false);
-                    txtEndTime.setEnabled(false);
-                }
-                else{
-                    txtStartTime.setEnabled(true);
-                    txtEndTime.setEnabled(true);
                 }
             }
         });
@@ -192,6 +196,8 @@ public class UpdateTaskActivity extends AppCompatActivity {
                     Toast.makeText(UpdateTaskActivity.this, "Error while updating..", Toast.LENGTH_LONG).show();
                     Log.w(TAG, "Error got while updating taskId: "+oldTaskId);
                 }
+                Intent intentAddTask = new Intent(UpdateTaskActivity.this, MainActivity.class);
+                startActivity(intentAddTask);
             }
         });
     }

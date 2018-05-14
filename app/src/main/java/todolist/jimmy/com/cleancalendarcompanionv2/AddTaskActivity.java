@@ -2,6 +2,7 @@ package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -68,13 +69,17 @@ public class AddTaskActivity extends AppCompatActivity {
         calendar.setTime(new Date(selectedDate));
         txtTaskDate.setText(DateEx.getDateString(calendar.getTime()));
 
+        // disable text boxes (patch of editText not working as intended)
+        txtStartTime.setEnabled(false);
+        txtEndTime.setEnabled(false);
+        txtTaskDate.setEnabled(false);
+
         // task date on-click listener lambda that when inputted a task date, stores it
         btnSetDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         AddTaskActivity.this,
-                        R.style.Theme_AppCompat_DayNight_Dialog,
                         dateSetListener,
                         DateEx.getYearOf(null),
                         DateEx.getMonthOf(null) -1,
@@ -131,6 +136,8 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 String time = i + ":" + i1;
+                if (i1 < 10)
+                    time+= "0";
                 txtStartTime.setText(time);
             }
         };
@@ -139,6 +146,8 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 String time = i + ":" + i1;
+                if (i1 < 10)
+                    time+= "0";
                 txtEndTime.setText(time);
             }
         };
@@ -150,12 +159,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 if(allDayCheck.isChecked()) {
                     txtStartTime.setText(DateEx.getTimeString(DateEx.getTodayMorning()));
                     txtEndTime.setText(DateEx.getTimeString(DateEx.getTodayMidNight()));
-                    txtStartTime.setEnabled(false);
-                    txtEndTime.setEnabled(false);
-                }
-                else{
-                    txtStartTime.setEnabled(true);
-                    txtEndTime.setEnabled(true);
                 }
             }
         });
@@ -173,7 +176,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 task.setTask_name(txtTaskName.getText().toString().trim());
                 task.setTask_location(txtTaskLocation.getText().toString().trim());
                 try {
-                    task.setTask_date(DateEx.getDateOfDate(txtTaskDate.getText().toString().trim()));
+                    task.setTask_date(DateEx.getDateOfDate(txtTaskDate.getText().toString()));
                 } catch (ParseException e) {
                     Log.e(TAG, "Error while date parsing of task_date", e);
                 }
@@ -205,6 +208,8 @@ public class AddTaskActivity extends AppCompatActivity {
                     }
                     else
                         Toast.makeText(AddTaskActivity.this, "Error while saving reminder", Toast.LENGTH_LONG).show();
+                Intent intentAddTask = new Intent(AddTaskActivity.this, MainActivity.class);
+                startActivity(intentAddTask);
             }
         });
     }

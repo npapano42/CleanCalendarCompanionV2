@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
+// database class using SQLite
 public class TaskDB extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Tasks.db";
     private static final String TABLE_NAME = "Tasks";
@@ -22,6 +23,7 @@ public class TaskDB extends SQLiteOpenHelper {
     private static final String COL_9 = "is_all_day_task";
     private static final String COL_10 = "task_notification_time";
 
+    // format for columns
     private static final String SQL_CREATE_ENTRIES = "create table "+TABLE_NAME+" (" +
             COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COL_2+" TEXT, " +
@@ -35,23 +37,29 @@ public class TaskDB extends SQLiteOpenHelper {
             COL_10+" DATETIME)";
     private static final String SQL_DROP_ENTRIES = "drop table if exists "+TABLE_NAME;
 
-
+    // get database from another context
     public TaskDB(Context context) {
         super(context, DATABASE_NAME, null, 2);
     }
 
+    // run when database is originally created
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(SQL_CREATE_ENTRIES);
     }
 
+    // when database is upgraded, clear database
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL(SQL_DROP_ENTRIES);
     }
 
+    // insert a new task into the database
+    // returns true if successful, false otherwise
     public boolean insert(Task task){
         SQLiteDatabase db = this.getWritableDatabase();
+
+        // convert into table format
         ContentValues contentValues = new ContentValues();
         contentValues.put("task_name", task.getTask_name());
         contentValues.put("task_location", task.getTask_location());
@@ -70,7 +78,8 @@ public class TaskDB extends SQLiteOpenHelper {
             return true;
         }
     }
-
+    // Updates a task already in the database
+    // returns true if successful, false otherwise
     public boolean update(Task newTask, int oldTaskId){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -93,6 +102,8 @@ public class TaskDB extends SQLiteOpenHelper {
         }
     }
 
+    // finds a task by ID and deletes from the database
+    // returns true if successful, false otherwise
     public boolean delete(int taskId){
         SQLiteDatabase db = this.getWritableDatabase();
         String selection = COL_1 + " = ?";
@@ -105,6 +116,8 @@ public class TaskDB extends SQLiteOpenHelper {
         }
     }
 
+    // queries database for all tasks
+    // Returns a Cursor that points to the leading info in the database
     public Cursor selectAll(){
         SQLiteDatabase db = this.getWritableDatabase();
         String[] projection = {
@@ -123,7 +136,8 @@ public class TaskDB extends SQLiteOpenHelper {
     }
 
 
-    //Date format - yyyy-MM-dd HH:mm:ss
+    // queries database for task given a date
+    // returns a Cursor that points to the that date
     public Cursor selectByDate(String date){
         SQLiteDatabase db = this.getWritableDatabase();
         String[] projection = {
@@ -143,6 +157,8 @@ public class TaskDB extends SQLiteOpenHelper {
         return db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, null);
     }
 
+    // given 2 dates, queries database for tasks between those dates
+    // returns a Cursor that points to the info
     public Cursor selectBetweenDate(String date1, String date2){
         SQLiteDatabase db = this.getWritableDatabase();
         String[] projection = {
@@ -162,6 +178,8 @@ public class TaskDB extends SQLiteOpenHelper {
         return db.query(TABLE_NAME, projection, selection, selectionArgs, null, null, null);
     }
 
+    // finds a task by it's unqiue ID
+    // returns a cursor that points to that task
     public Cursor selectByTaskId(int taskId){
         SQLiteDatabase db = this.getWritableDatabase();
         String[] projection = {

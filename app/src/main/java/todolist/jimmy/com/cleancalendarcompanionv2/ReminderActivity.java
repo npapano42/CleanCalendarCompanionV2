@@ -12,7 +12,6 @@ import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 public class ReminderActivity extends AppCompatActivity {
 
     TextView txtTaskName, txtDescription;
-
     // executes when activity is switched to
     @Override
     protected void onCreate(Bundle savedInstanceState) {

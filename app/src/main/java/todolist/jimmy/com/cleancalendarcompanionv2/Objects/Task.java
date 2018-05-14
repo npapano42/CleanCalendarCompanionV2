@@ -139,15 +139,6 @@ public class Task implements Serializable{
             } catch (ParseException e) {
                 Log.e(TAG, "Error while parsing dates for task class", e);
             }
-/*
-                Calendar taskDate = Calendar.getInstance();
-                Calendar taskNotificationTime = Calendar.getInstance();
-                taskDate.setTime(DateEx.getDateOfDate(cursor.getString(3)));
-                taskNotificationTime.setTime(DateEx.getDateOfTime(cursor.getString(9)));
-                taskDate.set(Calendar.HOUR_OF_DAY, taskNotificationTime.get(Calendar.HOUR_OF_DAY));
-                taskDate.set(Calendar.MINUTE, taskNotificationTime.get(Calendar.MINUTE));
-                taskDate.set(Calendar.SECOND, taskNotificationTime.get(Calendar.SECOND));
-*/
 
             tempTask.setTask_participants(cursor.getString(4));
             tempTask.setTask_location(cursor.getString(7));
