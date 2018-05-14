@@ -9,6 +9,7 @@ import todolist.jimmy.com.cleancalendarcompanionv2.Helper.DateEx;
 import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 // database class using SQLite
+// stores the tasks
 public class TaskDB extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Tasks.db";
     private static final String TABLE_NAME = "Tasks";

@@ -19,31 +19,36 @@ import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 import java.util.List;
 
+// Class that deals with the Recycler view of having the tasks listed
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
     private Context context;
     private List<Task> tasks;
 
+    // ctor given a list of tasks
     public DataAdapter(Context context, List<Task> tasks) {
         this.context = context;
         this.tasks = tasks;
     }
 
+    // When created, adds a new viewHolder to the recyclerView
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
         return new ViewHolder(itemView);
     }
 
+    // Puts recyclerView cards in correct position specified by the xml
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Task task = tasks.get(holder.getAdapterPosition());
         holder.txtTaskName.setText(task.getTask_name());
         holder.txtTaskLocation.setText(task.getTask_location());
-        holder.txtTaskDate.setText(task.getTask_date().toString());
+        holder.txtTaskDate.setText(task.getTask_start().toString());
         holder.txtTaskStartTime.setText(task.getTask_start().toString());
         final String taskName = task.getTask_name();
         final int taskId = task.getTask_id();
 
+        // when a task is pressed, display info
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +83,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
             }
         });
 
+        // when a task is long pressed, Bring up menu to edit or remove the task
         holder.view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View view) {
@@ -112,13 +118,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
             }
         });
     }
+    // get the amount of tasks
 
     @Override
     public int getItemCount() {
         return tasks.size();
     }
 
-
+    // inner viewHolder class needded for RecyclerView to work
     public class ViewHolder extends RecyclerView.ViewHolder{
         private TextView txtTaskName;
         private TextView txtTaskDate;
@@ -126,6 +133,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder>{
         private TextView txtTaskStartTime;
         private View view;
 
+        // ctor that pulls the needed info from the xml to assign to variables
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;

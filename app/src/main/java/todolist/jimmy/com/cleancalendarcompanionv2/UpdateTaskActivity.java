@@ -25,6 +25,8 @@ import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 import java.text.ParseException;
 
 // Used with the update_task xml file
+// when a task is long pressed and edit is selected
+// helps adjust the information then add to the database
 public class UpdateTaskActivity extends AppCompatActivity {
     int oldTaskId;
 
@@ -64,6 +66,7 @@ public class UpdateTaskActivity extends AppCompatActivity {
         txtEndTime.setEnabled(false);
         txtTaskDate.setEnabled(false);
 
+        //get old taskID
         oldTaskId = getIntent().getExtras().getInt("oldTaskId");
 
         //Load old task onto screen

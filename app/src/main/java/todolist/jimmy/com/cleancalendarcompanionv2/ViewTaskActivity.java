@@ -157,7 +157,7 @@ public class ViewTaskActivity extends AppCompatActivity {
                 if(rbOn.isChecked()){
                     String date = null;
                     try {
-                        date = DateEx.getFormatedDateString(tvDate.getText().toString().trim());
+                        date = DateEx.getFormattedDateString(tvDate.getText().toString().trim());
                     } catch (ParseException e) {
                         Log.e(TAG, "Error while parsing date on Filter date", e);
                     }
@@ -166,13 +166,13 @@ public class ViewTaskActivity extends AppCompatActivity {
                 }else if(rbBetween.isChecked()){
                     String startDate = null;
                     try {
-                        startDate = DateEx.getFormatedDateString(tvDate.getText().toString().trim());
+                        startDate = DateEx.getFormattedDateString(tvDate.getText().toString().trim());
                     } catch (ParseException e) {
                         Log.e(TAG, "Error while parsing start date", e);
                     }
                     String endDate = null;
                     try {
-                        endDate = DateEx.getFormatedDateString(tvEndDate.getText().toString().trim());
+                        endDate = DateEx.getFormattedDateString(tvEndDate.getText().toString().trim());
                     } catch (ParseException e) {
                         Log.e(TAG, "Error while parsing end date", e);
                     }

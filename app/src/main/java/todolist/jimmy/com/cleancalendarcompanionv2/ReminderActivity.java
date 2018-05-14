@@ -9,6 +9,7 @@ import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 // Class attached with the reminder xml file
 // Pops up when reminder time is triggered
+// CURRENTLY NOT IMPLEMENTED
 public class ReminderActivity extends AppCompatActivity {
 
     TextView txtTaskName, txtDescription;

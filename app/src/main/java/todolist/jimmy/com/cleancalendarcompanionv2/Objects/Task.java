@@ -33,6 +33,7 @@ public class Task implements Serializable{
     // default ctor
     public Task() {}
 
+    // constructs a task given all needed information
     public Task(int task_id, String task_name, String task_description, String task_location,
                 String task_participants, Date task_date, boolean is_all_day_task,
                 Date task_start, Date task_end) {
@@ -47,6 +48,7 @@ public class Task implements Serializable{
         this.task_end = task_end;
     }
 
+    // various get and set methods
     public int getTask_id() {
         return task_id;
     }
@@ -120,7 +122,7 @@ public class Task implements Serializable{
     }
 
 
-
+    // returns a list of all tasks from the database
     public static List<Task> getAllTasks(Context context){
         List<Task> tasks = new ArrayList<>();
         TaskDB taskDB = new TaskDB(context);
@@ -148,6 +150,7 @@ public class Task implements Serializable{
         return tasks;
     }
 
+    // Given an ID, returns the task associated with that ID
     public static Task getTaskById(int taskId, Context context){
         Task tempTask = new Task();
         TaskDB taskDB = new TaskDB(context);
@@ -170,6 +173,7 @@ public class Task implements Serializable{
         return tempTask;
     }
 
+    // returns a list of tasks who exist on the date given by dateString
     public static List<Task> getTasksByDate(Context context, String dateString){
         List<Task> tasks = new ArrayList<>();
         TaskDB taskDB = new TaskDB(context);
@@ -195,6 +199,7 @@ public class Task implements Serializable{
         return tasks;
     }
 
+    // returns a list of tasks between dates startDateString and endDateSTring
     public static List<Task> getTasksByDateRange(Context context, String startDateString, String endDateString){
         List<Task> tasks = new ArrayList<>();
         TaskDB taskDB = new TaskDB(context);
