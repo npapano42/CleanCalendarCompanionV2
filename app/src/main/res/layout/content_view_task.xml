@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="On"
+                android:text="@string/on"
                 android:checked="true"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="0dp"
@@ -47,11 +47,10 @@
                 android:id="@+id/rbBetween"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
                 android:checked="false"
-                android:text="Between"
+                android:text="@string/between"
                 app:layout_constraintBaseline_toBaselineOf="@+id/rbOn"
                 app:layout_constraintLeft_toRightOf="@+id/rbOn" />
 
@@ -60,8 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
-                android:text="All" />
+                android:text="@string/all" />
         </RadioGroup>
 
         <Button
@@ -71,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:text="Filter"
+            android:text="@string/filter"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +86,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="and "
+                android:text="@string/and_space"
                 android:textAllCaps="false" />
 
             <TextView
@@ -98,7 +96,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView4"
                 android:layout_toRightOf="@+id/textView4"
-                android:text="Date" />
+                android:text="@string/date" />
 
         </RelativeLayout>
 
@@ -106,7 +104,7 @@
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/date"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -1,7 +1,6 @@
 package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +15,6 @@ import android.widget.CalendarView;
 import java.util.Date;
 import java.util.List;
 
-import todolist.jimmy.com.cleancalendarcompanionv2.Database.TaskDB;
 import todolist.jimmy.com.cleancalendarcompanionv2.Objects.Task;
 
 // class works with activity_main layout to display the main screen (summary view)
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         rvTaskList = (RecyclerView) findViewById(R.id.recyclerView_Tasks);
         layoutManager = new LinearLayoutManager(MainActivity.this);
         calendarView = (CalendarView) findViewById(R.id.calendarView);
-        btnToday = (Button) findViewById(R.id.btnToday);
+        btnToday = (Button) findViewById(R.id.btnSummary);
         btnViewTask = (Button) findViewById(R.id.btnViewTask);
         fabAddTask = (FloatingActionButton) findViewById(R.id.fabAddTask);
         fabAddTask.setColorFilter(Color.WHITE);

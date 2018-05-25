@@ -1,10 +1,8 @@
 package todolist.jimmy.com.cleancalendarcompanionv2;
 
 import android.app.Activity;
-import android.app.Activity;
 import android.app.Instrumentation;
 import android.support.test.rule.ActivityTestRule;
-import android.view.View;
 
 import org.junit.After;
 import org.junit.Before;
@@ -208,8 +206,8 @@ public class MainActivityTest {
     }
     @Test
     public void testTodayButton(){// TODAY button on the main view
-        assertNotNull(mainActivity.findViewById(R.id.btnToday));
-        onView(withId(R.id.btnToday)).perform(click());
+        assertNotNull(mainActivity.findViewById(R.id.btnSummary));
+        onView(withId(R.id.btnSummary)).perform(click());
     }
 
 
